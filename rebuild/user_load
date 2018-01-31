@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+bmx user create --balance=1000 --password=bugmark --usermail=test1@bugmark.net 
+bmx user create --balance=1000 --password=bugmark --usermail=test2@bugmark.net 
+bmx user create --balance=1000 --password=bugmark --usermail=test3@bugmark.net 
+bmx user create --balance=1000 --password=bugmark --usermail=joe@bugmark.net 
+bmx user create --balance=1000 --password=bugmark --usermail=jane@bugmark.net 
