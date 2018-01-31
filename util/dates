@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+require 'date'
+require 'time'
+require 'json'
+require 'pp'
+
+dates = JSON.parse(`bmx host next_week_ends`)
+
+puts "RAW STRINGS"
+list1 = dates.map {|d| d["week_end"]}
+pp list1
+
+puts "STRINGS CONVERTED TO DateTime"
+list2 = list1.map {|d| DateTime.strptime(d, "%Y-%m-%dT%H:%M:%S%z")}
+pp list2
+
+puts "STRINGS CONVERTED TO Time"
+list3 = list1.map {|d| Time.parse(d)}
+pp list3
