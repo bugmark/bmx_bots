@@ -5,10 +5,9 @@ require 'time'
 require 'json'
 require 'pp'
 
-dates = JSON.parse(`bmx host next_week_ends`)
+list1 = JSON.parse(`bmx host next_week_ends`)
 
 puts "RAW STRINGS"
-list1 = dates.map {|d| d["week_end"]}
 pp list1
 
 puts "STRINGS CONVERTED TO DateTime"
