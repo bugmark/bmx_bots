@@ -7,7 +7,8 @@ offers = JSON.parse(`bmx offer list --type=Buy --status=open`).map {|el| el["uui
 
 offers.each do |uuid|
   cmd = "bmx contract cross #{uuid} --commit-type=expand"
+  puts "-----------------------------------------------------"
   puts cmd
-  `#{cmd}`
+  puts `#{cmd}`
 end
 
