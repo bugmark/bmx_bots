@@ -3,7 +3,7 @@
 require 'pry'
 require 'json'
 
-offers = JSON.parse(`bmx offer list --type=Buy --status=open`).map {|el| el["uuid"]}
+offers = JSON.parse(`bmx offer list --with_type=Buy --with_status=open`).map {|el| el["uuid"]}
 
 offers.each do |uuid|
   cmd = "bmx contract cross #{uuid} --commit-type=expand"

@@ -5,8 +5,8 @@ require 'time'
 require 'pry'
 require 'pp'
 
-dates  = JSON.parse(`bmx host next_week_ends`).map {|str| Time.parse(str).strftime("%y%m%d_%H%M")}
-users  = JSON.parse(`bmx user list`).select {|el| el["email"].match(/^test/)}.map {|el| el["email"] + ":bugmark"}
+dates  = JSON.parse(`bmx host next_week_ends --strftime=%Y%m%d_%H%M`)
+users  = JSON.parse(`bmx user list --with_email=test`).map {|el| el["email"] + ":bugmark"}
 issues = JSON.parse(`bmx issue list --limit=3`).map {|el| el["uuid"]}
 
 opts = [
