@@ -2,8 +2,6 @@
 
 require 'json'
 
-abort("UNDER CONSTRUCTION!!!") unless ENV['SYSNAME'] == "soak"
-
 PROCNAME = "buy_bot_cli"
 Process.setproctitle(PROCNAME)
 

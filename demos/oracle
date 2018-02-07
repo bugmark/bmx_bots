@@ -1,0 +1,51 @@
+#!/usr/bin/env ruby
+
+require 'json'
+
+PROCNAME = "oracle_cli"
+Process.setproctitle(PROCNAME)
+
+def hdr(string)
+  puts "----- #{string.upcase} ".ljust(60, '-')
+end
+
+hdr  "BUGMARK ISSUE ORACLE"
+puts "START #{Time.now} | C-c to exit"
+puts "Process Name: #{PROCNAME}"
+
+hdr "CREATE SIMULATED REPO"
+REPO = JSON.parse(`bmx repo create SIMULA --type=Test`)
+pp REPO
+
+EXIDS = %w(aaa bbb ccc ddd eee fff ggg hhh iii jjj kkk)
+
+def defaults
+  {
+    "type"      => "Test"          ,
+    "repo_uuid" => REPO["uuid"]    ,
+  }
+end
+
+def sync(exid, lcl_opts = {})
+  opts = defaults.merge(lcl_opts)
+  args = opts.keys.map {|key| "--#{key}=#{opts[key]}"}.join(" ")
+  `bmx issue sync #{exid} #{args}`
+end
+
+hdr "FIRST PASS"
+EXIDS.each do |exid|
+  sync(exid, "title" => "Issue_#{exid}", "status" => "open")
+  print "."
+end
+puts "."
+
+puts `bmx repo show #{REPO["uuid"]} --issues`
+
+hdr "SECOND PASS"
+EXIDS.each do |exid|
+  sync(exid, "status" => "closed")
+  print "."
+end
+puts "."
+
+puts `bmx repo show #{REPO["uuid"]} --issues`
