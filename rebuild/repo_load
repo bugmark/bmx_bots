@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+
+require 'json'
+
+def stop
+  abort "Usage: repo_load <github|test>" 
+end
+
+def gen_github_repo
+  `bmx repo create bugmark/bugmark      --sync=true --type=GitHub`   
+  `bmx repo create bugmark/bmx_api_ruby --sync=true --type=GitHub`
+  `bmx repo create bugmark/bmx_cl_ruby  --sync=true --type=GitHub`
+  `bmx repo create bugmark/bmx_bots     --sync=true --type=GitHub`
+end
+
+def gen_test_repo
+  repo_uuid = JSON.parse(`bmx repo create TestRepo --type=Test`)["uuid"]
+  %w(aa bb cc dd ee ff gg hh ii jj kk ll mm).each do |exid|
+    `bmx issue sync #{exid} --title=Title_#{exid} --status=open --repo_uuid=#{repo_uuid}`
+  end
+end
+
+stop if ARGV.count == 0
+
+REPO_TYPE = ARGV[0]
+
+stop unless %w(github test).include?(REPO_TYPE)
+
+case REPO_TYPE
+when 'github' then gen_github_repo
+when 'test'   then gen_test_repo
+end
+

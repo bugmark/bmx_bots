@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-bmx repo create bugmark/bugmark      --sync=true
-bmx repo create bugmark/bmx_api_ruby --sync=true
-bmx repo create bugmark/bmx_cl_ruby  --sync=true
-bmx repo create bugmark/bmx_bots     --sync=true

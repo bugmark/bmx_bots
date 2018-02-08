@@ -1,14 +1,20 @@
 #!/usr/bin/env bash
 
-echo "----- BUGMARK-CLI TOTAL REBUILD ---------------------"
-echo "START `date`"
+abort() {
+  echo "Usage: all <github|test>"
+  exit 1
+}
 
+[ "$#" == "0" ] && abort
+[ "$1" == "github" ] || [ "$1" == "test" ] || abort
+
+echo "----- BUGMARK-CLI TOTAL REBUILD TEST ---------------------"
+echo "START `date`"
 ( echo Clear Old Data ; ./rebuild/clear         ) && 
 ( echo Load User Data ; ./rebuild/user_load     ) &&
-( echo Load GH data   ; ./rebuild/gh_load       ) &&
-( echo Load OfferBU   ; ./rebuild/offer_bu_load ) &&
-( echo Load OfferBF   ; ./rebuild/offer_bf_load ) &&
+( echo Load Test Repo ; ./rebuild/repo_load $1  ) &&
+( echo Load OfferBU   ; ./rebuild/offer_load_bu ) &&
+( echo Load OfferBF   ; ./rebuild/offer_load_bf ) &&
 ( echo Load Contracts ; ./rebuild/contract_load ) &&
-( echo Counts         ; ./rebuild/count         ) 
-
+( echo Counts         ; ./rebuild/count         ) &&
 echo "DONE `date`"
