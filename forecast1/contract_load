@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+require 'pry'
+require 'json'
+
+offers = JSON.parse(`bmx offer list --with_type=Buy --with_status=open`).map {|el| el["uuid"]}
+
+offers.each do |uuid|
+  cmd = "bmx contract cross #{uuid} --commit-type=expand"
+  puts "-----------------------------------------------------"
+  puts cmd
+  puts `#{cmd}`
+end
+
