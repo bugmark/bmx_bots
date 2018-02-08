@@ -1,0 +1,72 @@
+A) === Set up GitHub and clone repository locally ===
+- create your account
+- install Git on your computer
+- clone the bugmark/bmx_bots repository to your local drive
+$ git clone git@github.com:bugmark/bmx_bots.git
+
+Helpful Resources:
+- https://services.github.com/on-demand/intro-to-github/
+- https://guides.github.com/activities/hello-world/
+
+
+B) === Setup Python environment locally ===
+- Install python https://www.python.org/downloads/ (3.5.2 - version run on server)
+- I personally use the editor Atom.io (https://atom.io/)
+- The packages for atom.io I use:
+   *  autocomplete-python
+   *  git-plus
+   *  highlight-selected
+   *  linter-flake8
+   *  linter-ui-default
+   *  linter
+   *  minimap
+
+Note: the linter-flake8 helps make sure the code is consistently formatted
+
+Helpful Resources:
+- https://medium.com/@andrealmar/how-to-setup-atom-as-your-python-development-environment-a67fe8738bd3
+
+
+D) === Workflow ===
+
+D.0 == structure of GitHub repository ==
+The git repository has a master branch, which is only for archiving (semi) stable code. Actual development should occur on your own branch.
+
+1) Create your branch:
+local$> git checkout -b bot_malvika
+
+2) Within the repository, create your own folder where all of your work can live
+local$> mkdir malvika
+
+3) After making changes and saving your work, you need to commit the changes to the repository
+local$> git add *
+local$> git commit -m "short message describing changes"
+
+4) Then you need to upload the changes to the server by first pushing changes to GitHub
+local$> git push origin bot_malvika
+
+5) Finally you need to pull the changes down on the server
+server$> cd ~/bmx_bots
+server$> git pull
+
+6) Make sure you are in your branch
+server$> git checkout bot_malvika
+
+7) With these steps you can run your bot on the server after navigating to your folder
+
+Steps 1 and 2 are only for initial setup.
+You can repeat steps 3-7 now to make changes on the bot and test them on the server.
+You can make sure you are in the correct branch and see if changes need to be committed with
+local$> git status
+
+i) When you are satisfied with your bot and want to move it to the master branch run:
+local$> git checkout master
+local$> git pull origin master
+local$> git merge bot_malvika
+local$> git push origin master
+
+ii) occasionally, you want to synchronize your branch with master, e.g. to pull in changes in other directories.
+local$> git checkout master
+local$> git pull origin master
+local$> git checkout bot_malvika
+local$> git rebase master
