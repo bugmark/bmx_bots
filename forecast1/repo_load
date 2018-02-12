@@ -16,7 +16,7 @@ pp repo_hash
 repo_hash.each do |repo_name, repo_uuid|
   [1,2].map do |id|
     exid = "#{repo_name}_Issue#{id}"
-    cmd = "bmx issue sync #{exid} --title=#{exid} --status=open --repo_uuid=#{repo_uuid}"
+    cmd = "bmx issue sync #{exid} --type=Test --title=#{exid} --status=open --repo_uuid=#{repo_uuid}"
     system cmd
   end
 end

@@ -34,7 +34,7 @@ describe "rebuild" do
 
   describe "repo_load" do
     it "loads repos" do
-      result = `./rebuild/repo_load test`
+      result = `./rebuild/repo_load Test`
       expect($?.exitstatus).to eq(0)
       expect(result).to_not be_nil
     end
