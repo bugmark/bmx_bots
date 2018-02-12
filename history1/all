@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+echo "----- HISTORY1 ---------------------"
+echo "START `date`"
+( echo Clear Old Data ; ./history1/clear         ) &&
+( echo Load User Data ; ./history1/user_load.sh  ) &&
+( echo Load Repos     ; ./history1/repo_load     ) &&
+( echo Load Offers    ; ./history1/offer_load    ) &&
+( echo Counts         ; ./history1/count         ) &&
+echo "DONE `date`"

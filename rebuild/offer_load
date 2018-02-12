@@ -1,0 +1,114 @@
+#!/usr/bin/env ruby
+
+require 'json'
+require 'time'
+require 'pry'
+require 'pp'
+
+dates  = JSON.parse(`bmx host next_week_ends --strftime=%Y%m%d_%H%M`)
+users  = JSON.parse(`bmx user list --with_email=test`).map {|el| el["email"] + ":bugmark"}
+issues = JSON.parse(`bmx issue list --limit=3`).map {|el| el["uuid"]}
+
+found_opts = [
+  {
+    "issue"      => issues[1] ,
+    "price"      => 0.10      ,
+    "volume"     => 45        ,
+    "userspec"   => users[0]  ,
+    "maturation" => dates[0]
+  },
+  {
+    "issue"      => issues[2] ,
+    "price"      => 0.50      ,
+    "volume"     => 35        ,
+    "userspec"   => users[1]  ,
+    "maturation" => dates[0]
+  },
+  {
+    "issue"      => issues[0] ,
+    "price"      => 0.30     ,
+    "volume"     => 20        ,
+    "userspec"   => users[2]  ,
+    "maturation" => dates[0]
+  },
+  {
+    "issue"      => issues[2] ,
+    "price"      => 0.80      ,
+    "volume"     => 25        ,
+    "userspec"   => users[2]  ,
+    "maturation" => dates[0]
+  },
+  {
+    "issue"      => issues[1] ,
+    "price"      => 0.50      ,
+    "volume"     => 35        ,
+    "userspec"   => users[0]  ,
+    "maturation" => dates[0]
+  }
+]
+
+unfound_opts = [
+  {
+    "issue"      => issues[1] ,
+    "price"      => 0.90      ,
+    "volume"     => 45        ,
+    "userspec"   => users[1]  ,
+    "maturation" => dates[0]
+  },
+  {
+    "issue"      => issues[2] ,
+    "price"      => 0.50      ,
+    "volume"     => 30        ,
+    "userspec"   => users[0]  ,
+    "maturation" => dates[0]
+  },
+  {
+    "issue"      => issues[0] ,
+    "price"      => 0.80      ,
+    "volume"     => 40        ,
+    "userspec"   => users[2]  ,
+    "maturation" => dates[0]
+  },
+  {
+    "issue"      => issues[2] ,
+    "price"      => 0.50      ,
+    "volume"     => 25        ,
+    "userspec"   => users[2]  ,
+    "maturation" => dates[0]
+  },
+  {
+    "issue"      => issues[1] ,
+    "price"      => 0.50      ,
+    "volume"     => 25        ,
+    "userspec"   => users[0]  ,
+    "maturation" => dates[0]
+  },
+  {
+    "issue"      => issues[1] ,
+    "price"      => 0.10      ,
+    "volume"     => 15        ,
+    "userspec"   => users[2]  ,
+    "maturation" => dates[0]
+  },
+  {
+    "issue"      => issues[1] ,
+    "price"      => 0.10      ,
+    "volume"     => 40        ,
+    "userspec"   => users[2]  ,
+    "maturation" => dates[0]
+  }
+]
+
+def gen_offers(list, side)
+  list.each do |opt|
+    opt["side"] = side
+    flags       = opt.keys.map {|k| "--#{k}=#{opt[k]}"}.join(' ')
+    cmd         = "bmx offer create_buy #{flags}"
+    puts cmd
+    puts `#{cmd}`
+  end
+end
+
+gen_offers(found_opts  , "fixed")
+gen_offers(unfound_opts, "unfixed")
+

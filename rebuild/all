@@ -13,8 +13,7 @@ echo "START `date`"
 ( echo Clear Old Data ; ./rebuild/clear         ) && 
 ( echo Load User Data ; ./rebuild/user_load     ) &&
 ( echo Load Test Repo ; ./rebuild/repo_load $1  ) &&
-( echo Load OfferBU   ; ./rebuild/offer_load_bu ) &&
-( echo Load OfferBF   ; ./rebuild/offer_load_bf ) &&
+( echo Load OfferBU   ; ./rebuild/offer_load    ) &&
 ( echo Load Contracts ; ./rebuild/contract_load ) &&
 ( echo Counts         ; ./rebuild/count         ) &&
 echo "DONE `date`"

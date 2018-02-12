@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+
+require 'json'
+require 'time'
+require 'pry'
+require 'pp'
+
+USERS  = JSON.parse(`bmx user list --with_email=user`).map {|el| el["email"] + ":bugmark"}
+ISSUES = JSON.parse(`bmx issue list --limit=3`).map {|el| el["uuid"]}
+
+def gen_offer(count)
+  opts = {
+    "side"       => ["fixed  ", "unfixed"].sample                        ,
+    "issue"      => ISSUES.sample                                        ,
+    "userspec"   => USERS.sample                                         ,
+    "maturation" => (Time.now + 7*24*60*60).strftime("%Y%m%d_%H%M")      ,
+    "volume"     => count                                                ,
+    "price"      => (0.10..0.90).step(0.05).map {|x| x.round(2)}.sample  ,
+  }
+  flags = opts.keys.map {|k| "--#{k}=#{opts[k]}"}.join(' ')
+  cmd   = "bmx offer create_buy #{flags}"
+  puts cmd
+  system "#{cmd} > /dev/null"
+end
+
+(1..40).each do |count|
+  gen_offer(count)
+  `bmx host increment_hour_offset --count=4`
+end
+
+`bmx host set_current_time`

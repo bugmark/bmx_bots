@@ -49,13 +49,7 @@ describe "rebuild" do
 
   describe "offer_load" do
     it "loads bu" do
-      result = `./rebuild/offer_load_bu`
-      expect($?.exitstatus).to eq(0)
-      expect(result).to_not be_nil
-    end
-
-    it "loads bf" do
-      result = `./rebuild/offer_load_bf`
+      result = `./rebuild/offer_load`
       expect($?.exitstatus).to eq(0)
       expect(result).to_not be_nil
     end
