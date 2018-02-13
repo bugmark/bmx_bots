@@ -55,7 +55,7 @@ funder = person.PTrivialCase1Funder(email)
 workers = []
 for w in range(10):
     email = "worker"+str(w)+"@bugmark.net"
-    worker = person.PTrivialCase1Worker(email)
+    workers[w] = person.PTrivialCase1Worker(email)
 
 
 # Step 4: run simulation
