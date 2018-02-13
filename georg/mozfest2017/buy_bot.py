@@ -83,9 +83,10 @@ for x in range(1, 100):
           len(open_offers)+" open offers | " +
           len(contracts)+" contracts | " +
           len(escrows)+" escrows")
-    if x < 50:
-        # time.sleep(5)
-    else:
-        # time.sleep(20)
+    # if x < 50:
+    #     time.sleep(5)
+    # else:
+    #     time.sleep(20)
+    #
 ttime = datetime.time()
 print("Terminating after 99 cycles "+ttime.strftime("%H:%M:%S"))
