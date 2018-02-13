@@ -19,7 +19,7 @@ import person
 import datetime
 
 # Step 1: define the simulation parameters
-# number_of_people = 10  # how many people we start with
+number_of_workers = 10  # how many people we start with
 # number_of_issues = 10  # how many issues we start with
 # rate_of_new_issues = 3  # create x new issues every day
 worker_starting_funds = 100  # how much money a worker starts with
@@ -56,9 +56,9 @@ funder = person.PTrivialCase1Funder(email)
 # list of workers = new worker (x10)
 print("create workers")
 workers = []
-for w in range(10):
+for w in range(number_of_workers):
     email = "worker"+str(w)+"@bugmark.net"
-    workers[w] = person.PTrivialCase1Worker(email)
+    workers.append(person.PTrivialCase1Worker(email))
 
 
 # Step 4: run simulation
@@ -77,7 +77,7 @@ for x in range(simulation_time):
     maturation = maturation_datetime.strftime("%y%m%d_%H%M")
 
     # create 10 of each: new issues, unfixed offers, and fixed offers
-    for i in range(10):
+    for i in range(number_of_workers):
         # new issue
         issues = issues + 1
         issue_rtn = check_output(["bmx", "issue", "sync",
