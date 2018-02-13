@@ -88,6 +88,7 @@ for x in range(simulation_time):
     # create 10 of each: new issues, unfixed offers, and fixed offers
     for i in range(number_of_workers):
         print(" "+str(i), end="")
+        sys.stdout.flush()
         # new issue
         issues = issues + 1
         issue_rtn = check_output(["bmx", "issue", "sync",
