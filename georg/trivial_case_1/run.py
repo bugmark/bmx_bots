@@ -39,6 +39,7 @@ check_output(["bmx", "host", "rebuild",
 # tracker.open_issue()  # (x10)
 issues = 0
 # create simulation repository
+print("reset bugmark")
 repo_name = "TrivialCase1Repo"
 repo_rtn = check_output(["bmx", "repo", "create",
                          repo_name,
@@ -48,10 +49,12 @@ repo_uuid = repo_obj["uuid"]
 
 # Step 3: instantiate people (agents)
 # Trivial Case 1 only has one funder
+print("create funder")
 email = "funder@bugmark.net"
 funder = person.PTrivialCase1Funder(email)
 
 # list of workers = new worker (x10)
+print("create workers")
 workers = []
 for w in range(10):
     email = "worker"+str(w)+"@bugmark.net"
@@ -64,6 +67,7 @@ for w in range(10):
 # end after simulation_time is expired
 # return to First.
 for x in range(simulation_time):
+    print("simulation step "+str(x))
     # get current system time
     host_rtn = check_output(["bmx", "host", "info"])
     host_obj = json.loads(host_rtn.decode("utf-8"))
