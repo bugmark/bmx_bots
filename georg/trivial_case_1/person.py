@@ -89,8 +89,8 @@ class PTrivialCase1Worker(Person):
                           "--volume=20",
                           "--price=0",
                           # TODO: wait for bmx show offer to expose the issue
-                          "--issue="+issue,
-                          "--maturation=" + offer["maturation"],
+                          "--issue="+str(issue),
+                          "--maturation=" + str(maturation),
                           "--userspec="+self.bugmark_email +
                           ":"+self.bugmark_password])
             return 1
