@@ -39,35 +39,39 @@ check_output(["bmx", "host", "rebuild",
 # tracker.open_issue()  # (x10)
 issues = 0
 # create simulation repository
-print("reset bugmark")
+print("reset bugmark", end="")
 repo_name = "TrivialCase1Repo"
 repo_rtn = check_output(["bmx", "repo", "create",
                          repo_name,
                          "--type=Test"])
 repo_obj = json.loads(repo_rtn.decode("utf-8"))
 repo_uuid = repo_obj["uuid"]
+print(" [DONE]")
 
 # Step 3: instantiate people (agents)
 # Trivial Case 1 only has one funder
-print("create funder")
+print("create funder", end="")
 email = "funder@bugmark.net"
 funder = person.PTrivialCase1Funder(email)
+print(" [DONE]")
 
 # list of workers = new worker (x10)
-print("create workers")
+print("create workers", end="")
 workers = []
 for w in range(number_of_workers):
+    print(" "+str(w), end="")
     email = "worker"+str(w)+"@bugmark.net"
     workers.append(person.PTrivialCase1Worker(email))
-
+print(" [DONE]")
 
 # Step 4: run simulation
 # First: create 10 issues, create an unfixed offer, match by a worker
 # Second: advance time by one day and pay out contracts
 # end after simulation_time is expired
 # return to First.
+print("Simulation:")
 for x in range(simulation_time):
-    print("simulation step "+str(x))
+    print(str(x)+":", end="")
     # get current system time
     host_rtn = check_output(["bmx", "host", "info"])
     host_obj = json.loads(host_rtn.decode("utf-8"))
@@ -78,6 +82,7 @@ for x in range(simulation_time):
 
     # create 10 of each: new issues, unfixed offers, and fixed offers
     for i in range(number_of_workers):
+        print(" "+str(i), end="")
         # new issue
         issues = issues + 1
         issue_rtn = check_output(["bmx", "issue", "sync",
@@ -94,5 +99,12 @@ for x in range(simulation_time):
         workers[i].trade_bugmark(issue_uuid, maturation)
 
     # Advance server time by one day
+    print(" (next day)", end="")
     check_output(["bmx", "host", "increment_day_offset"])
     # This should pay out maturing contracts
+    print(" pay out")
+    # TODO: pay out contracts
+
+print(" [DONE]")
+
+print("bot run success")

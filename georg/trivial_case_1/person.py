@@ -84,14 +84,15 @@ class PTrivialCase1Worker(Person):
             offer_uuid = offer_obj[0]['uuid']
             offer_obj2 = check_output(["bmx", "offer", "show", offer_uuid])
             offer = json.loads(offer_obj2.decode("utf-8"))
-            check_output(["bmx", "offer", "create_buy",
-                          "--side=fixed",
-                          "--volume=20",
-                          "--price=0",
-                          "--issue="+offer["issues"],
-                          "--maturation=" + offer["maturation"],
-                          "--userspec="+self.bugmark_email +
-                          ":"+self.bugmark_password])
+            # check_output(["bmx", "offer", "create_buy",
+            #               "--side=fixed",
+            #               "--volume=20",
+            #               "--price=0",
+            #               # TODO: wait for bmx show offer to expose the issue
+            #               "--issue="+offer["issue"],
+            #               "--maturation=" + offer["maturation"],
+            #               "--userspec="+self.bugmark_email +
+            #               ":"+self.bugmark_password])
             return 1
         return None
 
