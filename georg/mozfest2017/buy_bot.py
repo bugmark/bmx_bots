@@ -57,7 +57,7 @@ def buy():
                               secure_random.choice(maturations),
                               "--userspec="+secure_random.choice(users) +
                               ":"+password])
-    new_offer_uuid = json.loads(new_offer.decode("utf-8"))["uuid"]
+    new_offer_uuid = json.loads(new_offer.decode("utf-8"))["offer_uuid"]
     check_output(["bmx", "offer", "cross", new_offer_uuid,
                  "--commit-type=expand"])
 
