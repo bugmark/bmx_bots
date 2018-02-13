@@ -81,7 +81,7 @@ class PTrivialCase1Worker(Person):
                                .decode("utf-8"))
         if len(offer_obj) > 0:
             # get offer ID to 'show' details and get match parameters
-            offer_uuid = offer_obj['uuid']
+            offer_uuid = offer_obj[0]['uuid']
             offer_obj2 = check_output(["bmx", "offer", "show", offer_uuid])
             offer = json.loads(offer_obj2.decode("utf-8"))
             check_output(["bmx", "offer", "create_buy",
