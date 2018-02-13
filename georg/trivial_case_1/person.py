@@ -75,24 +75,24 @@ class PTrivialCase1Worker(Person):
     def trade_bugmark(self, issue, maturation, volume="20", price="1.00",
                       side="fixed"):
         # Trivial Case 1: find an open UNFIXED offer and buy it
-        offer_obj = json.loads(check_output(["bmx", "offer", "list",
-                                             "--with-type=Offer::Buy::Unfixed",
-                                             "--limit=1"])
-                               .decode("utf-8"))
+        # offer_obj = json.loads(check_output(["bmx", "offer", "list",
+        #                                      "--with-type=Offer::Buy::Unfixed",
+        #                                      "--limit=1"])
+        #                        .decode("utf-8"))
         if len(offer_obj) > 0:
             # get offer ID to 'show' details and get match parameters
-            offer_uuid = offer_obj[0]['uuid']
-            offer_obj2 = check_output(["bmx", "offer", "show", offer_uuid])
-            offer = json.loads(offer_obj2.decode("utf-8"))
-            # check_output(["bmx", "offer", "create_buy",
-            #               "--side=fixed",
-            #               "--volume=20",
-            #               "--price=0",
-            #               # TODO: wait for bmx show offer to expose the issue
-            #               "--issue="+offer["issue"],
-            #               "--maturation=" + offer["maturation"],
-            #               "--userspec="+self.bugmark_email +
-            #               ":"+self.bugmark_password])
+            # offer_uuid = offer_obj[0]['uuid']
+            # offer_obj2 = check_output(["bmx", "offer", "show", offer_uuid])
+            # offer = json.loads(offer_obj2.decode("utf-8"))
+            check_output(["bmx", "offer", "create_buy",
+                          "--side=fixed",
+                          "--volume=20",
+                          "--price=0",
+                          # TODO: wait for bmx show offer to expose the issue
+                          "--issue="+issue,
+                          "--maturation=" + offer["maturation"],
+                          "--userspec="+self.bugmark_email +
+                          ":"+self.bugmark_password])
             return 1
         return None
 
