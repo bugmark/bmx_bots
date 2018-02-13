@@ -25,7 +25,7 @@ class Person:
     non_active_days = 0  # how many days before coming back to the community
     skills = None  # skills this person has
 
-    def __int__(self, email, bugmark_user=None, pwd="bugmark",
+    def __init__(self, email, bugmark_user=None, pwd="bugmark",
                 issue_tracker=None):
         # bugmark related variables
         self.bugmark_email = email  # user account email on bugmark
@@ -48,7 +48,7 @@ class PTrivialCase1Worker(Person):
     # Worker for Trivial Case 1
     # Persona:
     #  - finds an UNFIXED offer and matches it
-    def __int__(self, email, bugmark_user=None, pwd="bugmark",
+    def __init__(self, email, bugmark_user=None, pwd="bugmark",
                 issue_tracker=None):
         super(self.__class__, self).__init__(email, pwd, bugmark_user,
                                              issue_tracker)
@@ -92,7 +92,7 @@ class PTrivialCase1Funder(Person):
     # Funder for Trivial Case 1
     # Persona:
     #  - funds an issue with an UNFIXED offer
-    def __int__(self, email, bugmark_user=None, pwd="bugmark",
+    def __init__(self, email, bugmark_user=None, pwd="bugmark",
                 issue_tracker=None):
         super(self.__class__, self).__init__(email, pwd, bugmark_user,
                                              issue_tracker)
@@ -123,7 +123,7 @@ class PProfitMaxizer(Person):
     # Persona:
     #  - tries to make a living with open source and bugmark
     #  - cares most about profit
-    def __int__(self, email=None, pwd=None, bugmark_user=None,
+    def __init__(self, email=None, pwd=None, bugmark_user=None,
                 issue_tracker=None):
         super(self.__class__, self).__init__(email, pwd, bugmark_user,
                                              issue_tracker)
