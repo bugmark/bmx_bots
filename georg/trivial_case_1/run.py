@@ -15,7 +15,7 @@
 from subprocess import check_output
 import json
 # import issuetracker
-from ..simulator.person import PTrivialCase1funder PTrivialCase1Worker
+from ..simulator.person import PTrivialCase1Funder, PTrivialCase1Worker
 import datetime
 
 # Step 1: define the simulation parameters
