@@ -26,7 +26,7 @@ class Person:
     skills = None  # skills this person has
 
     def __init__(self, email, bugmark_user=None, pwd="bugmark",
-                issue_tracker=None):
+                 issue_tracker=None):
         # bugmark related variables
         self.bugmark_email = email  # user account email on bugmark
         self.bugmark_password = pwd  # password on bugmark
@@ -49,12 +49,16 @@ class PTrivialCase1Worker(Person):
     # Persona:
     #  - finds an UNFIXED offer and matches it
     def __init__(self, email, bugmark_user=None, pwd="bugmark",
-                issue_tracker=None):
+                 issue_tracker=None):
         super(self.__class__, self).__init__(email, pwd, bugmark_user,
                                              issue_tracker)
         self.productivity = 10
         self.non_active_days = 0
         self.skills = 'all'
+        self.bugmark_email = email  # user account email on bugmark
+        self.bugmark_password = pwd  # password on bugmark
+        self.bugmark_uuid = bugmark_user  # USER_UUID on bugmark
+        self.tracker = issue_tracker  # reference to the issue tracker
 
     def community_work(self):
         # only do work, if has fixed position on an issue
@@ -93,12 +97,16 @@ class PTrivialCase1Funder(Person):
     # Persona:
     #  - funds an issue with an UNFIXED offer
     def __init__(self, email, bugmark_user=None, pwd="bugmark",
-                issue_tracker=None):
+                 issue_tracker=None):
         super(self.__class__, self).__init__(email, pwd, bugmark_user,
                                              issue_tracker)
         self.productivity = 10
         self.non_active_days = 0
         self.skills = 'all'
+        self.bugmark_email = email  # user account email on bugmark
+        self.bugmark_password = pwd  # password on bugmark
+        self.bugmark_uuid = bugmark_user  # USER_UUID on bugmark
+        self.tracker = issue_tracker  # reference to the issue tracker
 
     def community_work(self):
         # not implemented in Trivial Case 1
@@ -124,7 +132,7 @@ class PProfitMaxizer(Person):
     #  - tries to make a living with open source and bugmark
     #  - cares most about profit
     def __init__(self, email=None, pwd=None, bugmark_user=None,
-                issue_tracker=None):
+                 issue_tracker=None):
         super(self.__class__, self).__init__(email, pwd, bugmark_user,
                                              issue_tracker)
         self.productivity = 10
