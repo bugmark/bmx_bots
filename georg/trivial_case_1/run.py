@@ -15,7 +15,7 @@
 from subprocess import check_output
 import json
 # import issuetracker
-import person
+from ..simulator import person
 import datetime
 
 # Step 1: define the simulation parameters
