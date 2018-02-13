@@ -64,6 +64,7 @@ sys.stdout.flush()
 workers = []
 for w in range(number_of_workers):
     print(" "+str(w), end="")
+    sys.stdout.flush()
     email = "worker"+str(w)+"@bugmark.net"
     workers.append(person.PTrivialCase1Worker(email))
 print(" [DONE]")
