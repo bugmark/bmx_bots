@@ -79,21 +79,21 @@ class PTrivialCase1Worker(Person):
         #                                      "--with-type=Offer::Buy::Unfixed",
         #                                      "--limit=1"])
         #                        .decode("utf-8"))
-        if len(offer_obj) > 0:
-            # get offer ID to 'show' details and get match parameters
-            # offer_uuid = offer_obj[0]['uuid']
-            # offer_obj2 = check_output(["bmx", "offer", "show", offer_uuid])
-            # offer = json.loads(offer_obj2.decode("utf-8"))
-            check_output(["bmx", "offer", "create_buy",
-                          "--side=fixed",
-                          "--volume=20",
-                          "--price=0",
-                          # TODO: wait for bmx show offer to expose the issue
-                          "--issue="+str(issue),
-                          "--maturation=" + str(maturation),
-                          "--userspec="+self.bugmark_email +
-                          ":"+self.bugmark_password])
-            return 1
+        # if len(offer_obj) > 0:
+        # get offer ID to 'show' details and get match parameters
+        # offer_uuid = offer_obj[0]['uuid']
+        # offer_obj2 = check_output(["bmx", "offer", "show", offer_uuid])
+        # offer = json.loads(offer_obj2.decode("utf-8"))
+        check_output(["bmx", "offer", "create_buy",
+                      "--side=fixed",
+                      "--volume=20",
+                      "--price=0",
+                      # TODO: wait for bmx show offer to expose the issue
+                      "--issue="+str(issue),
+                      "--maturation=" + str(maturation),
+                      "--userspec="+self.bugmark_email +
+                      ":"+self.bugmark_password])
+        #    return 1
         return None
 
 
