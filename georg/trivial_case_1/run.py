@@ -15,7 +15,7 @@
 from subprocess import check_output
 import json
 # import issuetracker
-from ..simulator.person import PTrivialCase1Funder, PTrivialCase1Worker
+import person
 import datetime
 
 # Step 1: define the simulation parameters
@@ -52,7 +52,7 @@ email = "funder@bugmark.net"
 check_output(["bmx", "user", "create",
               "--usermail="+email,
               "--password=bugmark"])
-funder = PTrivialCase1Funder(email)
+funder = person.PTrivialCase1Funder(email)
 
 # list of workers = new worker (x10)
 workers = []
@@ -61,7 +61,7 @@ for w in range(10):
     check_output(["bmx", "user", "create",
                   "--usermail="+email,
                   "--password=bugmark"])
-    worker = PTrivialCase1Worker(email)
+    worker = person.PTrivialCase1Worker(email)
 
 
 # Step 4: run simulation
