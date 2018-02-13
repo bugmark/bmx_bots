@@ -84,6 +84,9 @@ class PTrivialCase1Worker(Person):
         # offer_uuid = offer_obj[0]['uuid']
         # offer_obj2 = check_output(["bmx", "offer", "show", offer_uuid])
         # offer = json.loads(offer_obj2.decode("utf-8"))
+
+        # circumvent finding the issue by just providing it.
+        # this works because there is no variability
         check_output(["bmx", "offer", "create_buy",
                       "--side=fixed",
                       "--volume=20",
