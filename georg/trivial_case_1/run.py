@@ -14,6 +14,7 @@
 
 from subprocess import check_output
 import json
+import sys
 # import issuetracker
 import person
 import datetime
@@ -40,6 +41,7 @@ check_output(["bmx", "host", "rebuild",
 issues = 0
 # create simulation repository
 print("reset bugmark", end="")
+sys.stdout.flush()
 repo_name = "TrivialCase1Repo"
 repo_rtn = check_output(["bmx", "repo", "create",
                          repo_name,
@@ -51,12 +53,14 @@ print(" [DONE]")
 # Step 3: instantiate people (agents)
 # Trivial Case 1 only has one funder
 print("create funder", end="")
+sys.stdout.flush()
 email = "funder@bugmark.net"
 funder = person.PTrivialCase1Funder(email)
 print(" [DONE]")
 
 # list of workers = new worker (x10)
 print("create workers", end="")
+sys.stdout.flush()
 workers = []
 for w in range(number_of_workers):
     print(" "+str(w), end="")
@@ -72,6 +76,7 @@ print(" [DONE]")
 print("Simulation:")
 for x in range(simulation_time):
     print(str(x)+":", end="")
+    sys.stdout.flush()
     # get current system time
     host_rtn = check_output(["bmx", "host", "info"])
     host_obj = json.loads(host_rtn.decode("utf-8"))
@@ -100,6 +105,7 @@ for x in range(simulation_time):
 
     # Advance server time by one day
     print(" (next day)", end="")
+    sys.stdout.flush()
     check_output(["bmx", "host", "increment_day_offset"])
     # This should pay out maturing contracts
     print(" pay out")
