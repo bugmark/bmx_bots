@@ -18,7 +18,7 @@
 from subprocess import check_output
 import json
 import random
-import time
+# import time
 import datetime
 
 # possible maturation dates: array of dates determine by ???
@@ -50,9 +50,9 @@ def buy():
     secure_random = random.SystemRandom()
     new_offer = check_output(["bmx", "offer", "create_buy",
                               "--side="+secure_random.choice(sides),
-                              "--volume="+secure_random.choice(volumes),
-                              "--price="+secure_random.choice(prices),
-                              "--issue="+secure_random.choice(issues),
+                              "--volume="+str(secure_random.choice(volumes)),
+                              "--price="+str(secure_random.choice(prices)),
+                              "--issue="+str(secure_random.choice(issues)),
                               "--maturation=" +
                               secure_random.choice(maturations),
                               "--userspec="+secure_random.choice(users) +
