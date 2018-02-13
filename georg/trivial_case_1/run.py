@@ -49,18 +49,12 @@ repo_uuid = repo_obj["uuid"]
 # Step 3: instantiate people (agents)
 # Trivial Case 1 only has one funder
 email = "funder@bugmark.net"
-check_output(["bmx", "user", "create",
-              "--usermail="+email,
-              "--password=bugmark"])
 funder = person.PTrivialCase1Funder(email)
 
 # list of workers = new worker (x10)
 workers = []
 for w in range(10):
     email = "worker"+str(w)+"@bugmark.net"
-    check_output(["bmx", "user", "create",
-                  "--usermail="+email,
-                  "--password=bugmark"])
     worker = person.PTrivialCase1Worker(email)
 
 

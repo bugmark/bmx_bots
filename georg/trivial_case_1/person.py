@@ -60,6 +60,10 @@ class PTrivialCase1Worker(Person):
         self.bugmark_uuid = bugmark_user  # USER_UUID on bugmark
         self.tracker = issue_tracker  # reference to the issue tracker
 
+        check_output(["bmx", "user", "create",
+                      "--usermail="+email,
+                      "--password=bugmark"])
+
     def community_work(self):
         # only do work, if has fixed position on an issue
         # eg:
@@ -107,6 +111,10 @@ class PTrivialCase1Funder(Person):
         self.bugmark_password = pwd  # password on bugmark
         self.bugmark_uuid = bugmark_user  # USER_UUID on bugmark
         self.tracker = issue_tracker  # reference to the issue tracker
+
+        check_output(["bmx", "user", "create",
+                      "--usermail="+email,
+                      "--password=bugmark"])
 
     def community_work(self):
         # not implemented in Trivial Case 1
