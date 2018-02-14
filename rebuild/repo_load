@@ -16,7 +16,7 @@ end
 def gen_test_repo
   repo_uuid = JSON.parse(`bmx repo create TestRepo --type=Test`)["uuid"]
   %w(aa bb cc dd ee ff gg hh ii jj kk ll mm).each do |exid|
-    `bmx issue sync #{exid} --type=Test --title=Title_#{exid} --status=open --repo_uuid=#{repo_uuid}`
+    `bmx issue sync #{exid} --title=Title_#{exid} --status=open --repo_uuid=#{repo_uuid}`
   end
 end
 
