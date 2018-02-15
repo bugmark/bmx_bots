@@ -106,9 +106,9 @@ for x in range(simulation_time):
         offer = workers[i].trade_bugmark(issue_uuid, maturation)
 
         # cross offers
-        check_output(["bmx", "issue", "sync",
-                      str(issues),
-                      "--status=fixed"])
+        check_output(["bmx", "contract", "cross",
+                      offer["offer_uuid"],
+                      "--commit-type=expand"])
 
     # Advance server time by one day
     print(" (next day)", end="")
