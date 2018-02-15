@@ -92,13 +92,14 @@ class PTrivialCase1Worker(Person):
                                   "--side=fixed",
                                   "--volume=20",
                                   "--price=0",
-                                  # TODO: wait for bmx show offer to expose the issue
                                   "--issue="+str(issue),
                                   "--maturation=" + str(maturation),
                                   "--userspec="+self.bugmark_email +
                                   ":"+self.bugmark_password])
+        offer = json.loads(offer_rtn.decode("utf-8"))
+        # check_output(["bmx", "contract", "list"])
         #    return 1
-        return None
+        return offer
 
 
 class PTrivialCase1Funder(Person):
