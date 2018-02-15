@@ -107,7 +107,7 @@ for x in range(simulation_time):
 
         # cross offers
         check_output(["bmx", "contract", "cross",
-                      offer["uuid"],
+                      offer["offer_uuid"],
                       "--commit-type=expand"])
 
     # Advance server time by one day
