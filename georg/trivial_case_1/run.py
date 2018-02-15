@@ -99,11 +99,16 @@ for x in range(simulation_time):
         issue_obj = json.loads(issue_rtn.decode("utf-8"))
         issue_uuid = issue_obj["uuid"]
 
-        # funder
+        # funder creates offer
         funder.trade_bugmark(issue_uuid, maturation)
 
-        # worker
-        workers[i].trade_bugmark(issue_uuid, maturation)
+        # worker matches offer
+        offer = workers[i].trade_bugmark(issue_uuid, maturation)
+
+        # cross offers
+        check_output(["bmx", "contract", "cross",
+                      offer["uuid"],
+                      "--commit-type=expand"])
 
     # Advance server time by one day
     print(" (next day)", end="")
@@ -114,11 +119,8 @@ for x in range(simulation_time):
     contracts_rtn = check_output(["bmx", "contract", "list"])
     contracts_obj = json.loads(contracts_rtn.decode("utf-8"))
     for contract in contracts_obj:
-        check_output(["bmx", "contract", "resolve",
-                      contract[uuid]])
-
-
-
-print(" [DONE]")
+        check_output(["bmx", "contract", "resolve", contract["uuid"]])
+    #
+    print(" [DONE]")
 
 print("bot run success")

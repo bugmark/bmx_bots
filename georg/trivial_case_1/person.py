@@ -63,7 +63,7 @@ class PTrivialCase1Worker(Person):
         check_output(["bmx", "user", "create",
                       "--usermail="+self.bugmark_email,
                       "--password="+str(self.bugmark_password),
-                      "--balance=999999999"])
+                      "--balance=100"])
 
     def community_work(self):
         # only do work, if has fixed position on an issue
@@ -88,15 +88,15 @@ class PTrivialCase1Worker(Person):
 
         # circumvent finding the issue by just providing it.
         # this works because there is no variability
-        check_output(["bmx", "offer", "create_buy",
-                      "--side=fixed",
-                      "--volume=20",
-                      "--price=0",
-                      # TODO: wait for bmx show offer to expose the issue
-                      "--issue="+str(issue),
-                      "--maturation=" + str(maturation),
-                      "--userspec="+self.bugmark_email +
-                      ":"+self.bugmark_password])
+        offer_rtn = check_output(["bmx", "offer", "create_buy",
+                                  "--side=fixed",
+                                  "--volume=20",
+                                  "--price=0",
+                                  # TODO: wait for bmx show offer to expose the issue
+                                  "--issue="+str(issue),
+                                  "--maturation=" + str(maturation),
+                                  "--userspec="+self.bugmark_email +
+                                  ":"+self.bugmark_password])
         #    return 1
         return None
 
@@ -120,7 +120,7 @@ class PTrivialCase1Funder(Person):
         check_output(["bmx", "user", "create",
                       "--usermail="+self.bugmark_email,
                       "--password="+str(self.bugmark_password),
-                      "--balance=100"])
+                      "--balance=999999999"])
 
     def community_work(self):
         # not implemented in Trivial Case 1
@@ -132,7 +132,7 @@ class PTrivialCase1Funder(Person):
         offer = check_output(["bmx", "offer", "create_buy",
                               "--side=unfixed",
                               "--volume=20",
-                              "--price=0",
+                              "--price=1",
                               "--issue="+issue,
                               "--maturation=" + maturation,
                               "--userspec="+self.bugmark_email +
