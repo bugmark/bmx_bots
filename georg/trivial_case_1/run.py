@@ -94,7 +94,7 @@ for x in range(simulation_time):
         issues = issues + 1
         issue_rtn = check_output(["bmx", "issue", "sync",
                                   str(issues),
-                                  "--type=Test",
+                                  # "--type=Test",
                                   "--repo-uuid="+repo_uuid])
         issue_obj = json.loads(issue_rtn.decode("utf-8"))
         issue_uuid = issue_obj["uuid"]
@@ -111,7 +111,13 @@ for x in range(simulation_time):
     check_output(["bmx", "host", "increment_day_offset"])
     # This should pay out maturing contracts
     print(" pay out")
-    # TODO: pay out contracts
+    contracts_rtn = check_output(["bmx", "contract", "list"])
+    contracts_obj = json.loads(contracts_rtn.decode("utf-8"))
+    for contract in contracts_obj:
+        check_output(["bmx", "contract", "resolve",
+                      contract[uuid]])
+
+
 
 print(" [DONE]")
 

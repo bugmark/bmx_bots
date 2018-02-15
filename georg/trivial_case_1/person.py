@@ -52,8 +52,8 @@ class PTrivialCase1Worker(Person):
                  issue_tracker=None):
         super(self.__class__, self).__init__(email, pwd, bugmark_user,
                                              issue_tracker)
-        self.productivity = 10
-        self.non_active_days = 0
+        # self.productivity = 10
+        # self.non_active_days = 0
         self.skills = 'all'
         self.bugmark_email = email  # user account email on bugmark
         self.bugmark_password = pwd  # password on bugmark
@@ -61,8 +61,9 @@ class PTrivialCase1Worker(Person):
         self.tracker = issue_tracker  # reference to the issue tracker
 
         check_output(["bmx", "user", "create",
-                      "--usermail="+email,
-                      "--password=bugmark"])
+                      "--usermail="+self.bugmark_email,
+                      "--password="+str(self.bugmark_password),
+                      "--balance=999999999"])
 
     def community_work(self):
         # only do work, if has fixed position on an issue
@@ -117,8 +118,9 @@ class PTrivialCase1Funder(Person):
         self.tracker = issue_tracker  # reference to the issue tracker
 
         check_output(["bmx", "user", "create",
-                      "--usermail="+email,
-                      "--password=bugmark"])
+                      "--usermail="+self.bugmark_email,
+                      "--password="+str(self.bugmark_password),
+                      "--balance=100"])
 
     def community_work(self):
         # not implemented in Trivial Case 1
