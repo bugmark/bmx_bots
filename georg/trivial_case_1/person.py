@@ -63,7 +63,7 @@ class PTrivialCase1Worker(Person):
         check_output(["bmx", "user", "create",
                       "--usermail="+self.bugmark_email,
                       "--password="+str(self.bugmark_password),
-                      "--balance=100"])
+                      "--balance=0"])
 
     def community_work(self):
         # only do work, if has fixed position on an issue
@@ -90,7 +90,7 @@ class PTrivialCase1Worker(Person):
         # this works because there is no variability
         offer_rtn = check_output(["bmx", "offer", "create_buy",
                                   "--side=fixed",
-                                  "--volume=20",
+                                  "--volume=100",
                                   "--price=0",
                                   "--issue="+str(issue),
                                   "--maturation=" + str(maturation),
@@ -129,7 +129,7 @@ class PTrivialCase1Funder(Person):
         check_output(["bmx", "user", "create",
                       "--usermail="+self.bugmark_email,
                       "--password="+str(self.bugmark_password),
-                      "--balance=999999999"])
+                      "--balance=100000000"])
 
     def community_work(self):
         # not implemented in Trivial Case 1
@@ -140,7 +140,7 @@ class PTrivialCase1Funder(Person):
         # Trivial Case 1: create an UNFIXED offer
         offer = check_output(["bmx", "offer", "create_buy",
                               "--side=unfixed",
-                              "--volume=20",
+                              "--volume=100",
                               "--price=1",
                               "--issue="+issue,
                               "--maturation=" + maturation,
