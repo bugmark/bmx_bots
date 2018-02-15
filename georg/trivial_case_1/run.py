@@ -115,13 +115,13 @@ for x in range(simulation_time):
     sys.stdout.flush()
     check_output(["bmx", "host", "increment_day_offset"])
     # This should pay out maturing contracts
-    print(" pay out")
+    print(" pay out", end="")
     contracts_rtn = check_output(["bmx", "contract", "list"])
     contracts_obj = json.loads(contracts_rtn.decode("utf-8"))
     for contract in contracts_obj:
         check_output(["bmx", "contract", "resolve", contract["uuid"]])
     #
-    print(" [DONE]", end="")
+    print(" [DONE]")
 
 print("bot run success")
 print("end simulation")
