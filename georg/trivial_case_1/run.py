@@ -121,6 +121,7 @@ for x in range(simulation_time):
     for contract in contracts_obj:
         check_output(["bmx", "contract", "resolve", contract["uuid"]])
     #
-    print(" [DONE]")
+    print(" [DONE]", end="")
 
 print("bot run success")
+print("end simulation")
