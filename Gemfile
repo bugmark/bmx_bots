@@ -1,3 +1,4 @@
 source "https://rubygems.org"
 
-gem "rspec"
+gem "rspec"   # regression tests
+gem "gruff"   # png graph generation
