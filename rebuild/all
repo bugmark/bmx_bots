@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: MPL-2.0
 
 abort() {
   echo "Usage: all <GitHub|Test>"
@@ -10,7 +11,7 @@ abort() {
 
 echo "----- BUGMARK-CLI TOTAL REBUILD TEST ---------------------"
 echo "START `date`"
-( echo Clear Old Data ; ./rebuild/clear         ) && 
+( echo Clear Old Data ; ./rebuild/clear         ) &&
 ( echo Load User Data ; ./rebuild/user_load     ) &&
 ( echo Load Test Repo ; ./rebuild/repo_load $1  ) &&
 ( echo Load Offers    ; ./rebuild/offer_load    ) &&
