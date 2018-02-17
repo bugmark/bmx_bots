@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MPL-2.0
+
 require 'json'
 
 describe "issue_count" do

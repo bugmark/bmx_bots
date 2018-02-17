@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# SPDX-License-Identifier: MPL-2.0
 
 require 'json'
 
@@ -30,4 +31,3 @@ case REPO_TYPE
 when 'GitHub' then gen_github_repo
 when 'Test'   then gen_test_repo
 end
-

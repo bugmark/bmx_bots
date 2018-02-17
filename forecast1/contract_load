@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# SPDX-License-Identifier: MPL-2.0
 
 require 'pry'
 require 'json'
@@ -11,4 +12,3 @@ offers.each do |uuid|
   puts cmd
   puts `#{cmd}`
 end
-
