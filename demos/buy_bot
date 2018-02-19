@@ -59,13 +59,16 @@ def pa(el)
   el.to_s.rjust(2, "0")
 end
 
+HF_MAX  = 20    # High-Frequency Cycle Threshold
+CYC_MAX = 100   # Max Number of Cycles
+
 while true do
   count += 1
   time  = Time.now.strftime("%H:%M:%S")
   chash = JSON.parse(`bmx host counts`)
   puts "Cycle: #{pa count} | #{time} | #{pa chash["bu_offers"] + chash["bf_offers"]} open offers | #{pa chash["contracts"]} contracts | #{pa chash["escrows"]} escrows"
   STDOUT.flush
-  if count < 50
+  if count < HF_MAX
     sleep 5
   else
     sleep 20
@@ -73,5 +76,5 @@ while true do
   buy
   cross if count % 2 == 0
   STDOUT.flush
-  abort "Terminating after 50 cycles #{Time.now}" if count == 50
+  abort "Terminating after #{CYC_MAX} cycles #{Time.now}" if count == CYC_MAX
 end
