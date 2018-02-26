@@ -1,0 +1,25 @@
+#!/usr/bin/env python
+
+# ----- user_load -----
+
+import bugm_util as bugm
+
+num_workers    = bugm.env('NUM_WORKERS'   , 2)
+worker_balance = bugm.env('WORKER_BALANCE', 100)
+funder_balance = bugm.env('FUNDER_BALANCE', 10000000)
+
+# create users
+def create_user(email, balance="0"):
+  bugm.run_json(["user create",
+                 "--usermail="+email,
+                 "--password=bugmark",
+                 "--balance="+balance])
+
+# create funder
+create_user("funder@bugmark.net", str(funder_balance))
+
+# create workers
+for w in range(int(num_workers)):
+  email = "worker"+str(w)+"@bugmark.net"
+  create_user(email, str(worker_balance))
+
