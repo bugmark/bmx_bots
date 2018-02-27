@@ -1,0 +1,49 @@
+#!/usr/bin/env ruby
+
+# ----- simulation -----
+
+require 'json'
+
+# ----- local variables -----
+SIMULATION_DAYS = JSON.parse(`bmx host info`)["day_offset"] * -1
+REPO_UUID       = JSON.parse(`bmx repo list`)[0]["uuid"]
+FUNDER          = JSON.parse(`bmx user list --with_email=funder`)[0]
+WORKERS         = JSON.parse(`bmx user list --with_email=worker`)
+NUM_WORKERS     = WORKERS.length
+
+# ----- utility functions -----
+def create_issue(day, idx)
+  issue_id = "issue_#{day}_#{idx}"
+  JSON.parse(`bmx issue sync #{issue_id} --repo-uuid=#{REPO_UUID}`)["uuid"]
+end
+
+def create_buy_offer(issue, side, email)
+  price = side == "unfixed" ? 0 : 1
+  cmd   = ["bmx offer create_buy",
+           "--side=#{side}",
+           "--volume=100",
+           "--price=#{price}",
+           "--issue=#{issue}",
+           "--maturation_offset=hours_4",
+           "--userspec=#{email}:bugmark"].join(' ')
+  JSON.parse(`#{cmd}`)["offer_uuid"]
+end
+
+def take_offer(offer_uuid, email)
+  cmd    = "bmx offer take #{offer_uuid} --userspec=#{email}:bugmark"
+  JSON.parse(`#{cmd}`)["contract_uuid"]
+end
+
+# ----- main simulation -----
+(0...SIMULATION_DAYS).each do |day|
+  (0...NUM_WORKERS).each do |idx|
+    issue_uuid    = create_issue(day, idx)
+    offer_uuid    = create_buy_offer(issue_uuid, "unfixed", FUNDER["email"])
+    contract_uuid = take_offer(offer_uuid, WORKERS[idx]["email"])
+  end
+  `bmx host increment_day_offset`
+  contracts = JSON.parse(`bmx contract list`)
+  contracts.each do |contract|
+    `bmx contract resolve #{contract["uuid"]}`
+  end
+end

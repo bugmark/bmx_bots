@@ -1,9 +1,9 @@
 require 'json'
 
 describe "all_rebuild" do
-  describe "clear" do
-    it "clears the system" do
-      result = `./forecast1/clear`
+  describe "rebuild" do
+    it "rebuilds the system" do
+      result = `./pytest1/rebuild`
       expect($?.exitstatus).to eq(0)
       expect(result).to_not be_nil
     end
@@ -18,9 +18,23 @@ describe "all_rebuild" do
     end
   end
 
+  describe "repo_load" do
+    it "loads repos" do
+      result = `./pytest1/repo_load`
+      expect($?.exitstatus).to eq(0)
+      expect(result).to_not be_nil
+    end
+
+    it "generates accurate counts" do
+      result = JSON.parse(`bmx host counts`)
+      expect(result["num_repos"]).to eq(1)
+      expect(result["events"]).to eq(4)
+    end
+  end
+
   describe "user_load" do
     it "loads users" do
-      result = `./forecast1/user_load.sh`
+      result = `./pytest1/user_load`
       expect($?.exitstatus).to eq(0)
       expect(result).to_not be_nil
     end
@@ -28,37 +42,25 @@ describe "all_rebuild" do
     it "generates accurate counts" do
       result = JSON.parse(`bmx host counts`)
       expect(result["num_users"]).to eq(4)
-      expect(result["events"]).to    eq(9)
+      expect(result["events"]).to    eq(11)
     end
   end
 
-  describe "repo_load" do
-    it "loads repos" do
-      result = `./forecast1/repo_load`
+  describe "simulation" do
+    it "runs simulation" do
+      result = `./pytest1/simru`
       expect($?.exitstatus).to eq(0)
       expect(result).to_not be_nil
     end
 
     it "generates accurate counts" do
       result = JSON.parse(`bmx host counts`)
-      expect(result["num_repos"]).to eq(3)
-      expect(result["num_issues"]).to eq(6)
-      expect(result["events"]).to eq(19)
-    end
-  end
-
-  describe "offer_load" do
-    it "loads bu" do
-      result = `./forecast1/offer_load`
-      expect($?.exitstatus).to eq(0)
-      expect(result).to_not be_nil
-    end
-
-    it "generates accurate counts" do
-      result = JSON.parse(`bmx host counts`)
-      expect(result["bu_offers"]).to eq(7)
-      expect(result["bf_offers"]).to eq(5)
-      expect(result["events"]).to eq(32)
+      expect(result["num_users"]).to  eq(4)
+      expect(result["num_repos"]).to  eq(1)
+      expect(result["num_issues"]).to eq(4)
+      expect(result["offers"]).to     eq(2)
+      expect(result["contracts"]).to  eq(2)
+      expect(result["events"]).to     eq(42)
     end
   end
 end

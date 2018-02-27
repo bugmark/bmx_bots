@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+if [ "$1" == "full" ]; then
+  # ---------------------------------
+  # ----- SIMULATION PARAMETERS -----
+  # ---------------------------------
+
+  # ----- rebuild options -----
+  export SIMULATION_DAYS=10
+
+  # ----- repo options -----
+  export REPO_NAME="TestRepo" 
+
+  # ----- user options -----
+  export NUM_WORKERS=5
+  export WORKER_BALANCE=200
+  export FUNDER_BALANCE=999999999
+fi
+
+export DEBUG_MODE=False
+
+echo "----- pytest1 ---------------------"
+echo "START `date`"
+( echo Rebuild Data   ; ./pytest1/rebuild    ) &&
+( echo Load Repos     ; ./pytest1/repo_load  ) &&
+( echo Load Users     ; ./pytest1/user_load  ) &&
+( echo Run Simulation ; ./pytest1/simru      ) &&
+( echo Counts         ; ./pytest1/count      ) &&
+echo "DONE `date`"
