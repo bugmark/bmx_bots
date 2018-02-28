@@ -58,9 +58,17 @@ describe "all_rebuild" do
       expect(result["num_users"]).to  eq(4)
       expect(result["num_repos"]).to  eq(1)
       expect(result["num_issues"]).to eq(4)
-      expect(result["offers"]).to     eq(2)
-      expect(result["contracts"]).to  eq(2)
-      expect(result["events"]).to     eq(42)
+      expect(result["offers"]).to     eq(0)
+      expect(result["contracts"]).to  eq(0)
+      expect(result["events"]).to     eq(76)
+    end
+
+    it "has accurate user balances" do
+      funder  = JSON.parse(`bmx user list --with_email=funder`).first
+      workers = JSON.parse(`bmx user list --with_email=worker`)
+      expect(funder["balance"]).to     eq(100400)
+      expect(workers[0]["balance"]).to eq(9800)
+      expect(workers[1]["balance"]).to eq(9800)
     end
   end
 end

@@ -13,8 +13,8 @@ if [ "$1" == "full" ]; then
 
   # ----- user options -----
   export NUM_WORKERS=5
-  export WORKER_BALANCE=200
-  export FUNDER_BALANCE=999999999
+  export WORKER_BALANCE=20000
+  export FUNDER_BALANCE=100000000
 fi
 
 export DEBUG_MODE=False

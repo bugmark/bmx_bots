@@ -5,8 +5,8 @@
 import bugm_util as bugm
 
 num_workers    = bugm.env('NUM_WORKERS'   , 2)
-worker_balance = bugm.env('WORKER_BALANCE', 100)
-funder_balance = bugm.env('FUNDER_BALANCE', 10000000)
+worker_balance = bugm.env('WORKER_BALANCE', 10000)
+funder_balance = bugm.env('FUNDER_BALANCE', 100000)
 
 # create users
 def create_user(email, balance="0"):

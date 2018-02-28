@@ -5,7 +5,7 @@
 require 'json'
 
 # ----- local variables -----
-SIMULATION_DAYS = JSON.parse(`bmx host info`)["day_offset"] * -1
+SIMULATION_DAYS = 2 # JSON.parse(`bmx host info`)["day_offset"] * -1
 REPO_UUID       = JSON.parse(`bmx repo list`)[0]["uuid"]
 FUNDER          = JSON.parse(`bmx user list --with_email=funder`)[0]
 WORKERS         = JSON.parse(`bmx user list --with_email=worker`)
@@ -41,7 +41,7 @@ end
     offer_uuid    = create_buy_offer(issue_uuid, "unfixed", FUNDER["email"])
     contract_uuid = take_offer(offer_uuid, WORKERS[idx]["email"])
   end
-  `bmx host increment_day_offset`
+  `bmx host increment_day_offset --count=20`
   contracts = JSON.parse(`bmx contract list`)
   contracts.each do |contract|
     `bmx contract resolve #{contract["uuid"]}`
