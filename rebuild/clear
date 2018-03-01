@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 bmx host rebuild --affirm=destroy_all_data
-bmx config set --usermail=admin@bugmark.net --password=bugmark
+bmx config set --usermail=admin@bugmark.net --password=bugmark --color=false
