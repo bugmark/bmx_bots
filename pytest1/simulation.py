@@ -25,18 +25,14 @@ def create_buy_offer(issue, side, email):
              "--volume=100",
              "--price="+price,
              "--issue="+issue,
-             "--maturation_offset='hours(4)'",
+             "--maturation_offset=hours-4",
              "--userspec="+bugm.userspec(email)]
     offer_uuid = bugm.run_dict(opts)["offer_uuid"]
     return offer_uuid
 
 def take_offer(offer_uuid, email):
-    bugm.msg("OFFER UUID", offer_uuid)
-    bugm.msg("     EMAIL", email)
-    opts = ["offer take", offer_uuid, "--userspec="+bugm.userspec(email)]
-    result        = bugm.run_dict(opts)
-    bugm.msg("    RESULT", result)
-    contract_uuid = bugm.dict_from_json(result)["contract_uuid"]
+    opts          = ["offer take", offer_uuid, "--userspec="+bugm.userspec(email)]
+    contract_uuid = bugm.run_dict(opts)["contract_uuid"]
     return contract_uuid
 
 # ----- main simulation -----

@@ -10,11 +10,11 @@ describe "all_rebuild" do
 
     it "generates accurate counts" do
       result = JSON.parse(`bmx host counts`)
-      expect(result["num_users"]).to eq(1)
-      expect(result["num_repos"]).to eq(0)
-      expect(result["bu_offers"]).to eq(0)
-      expect(result["bf_offers"]).to eq(0)
-      expect(result["events"]).to    eq(2)
+      expect(result["users"]).to          eq(1)
+      expect(result["repos"]).to          eq(0)
+      expect(result["offers_open_bu"]).to eq(0)
+      expect(result["offers_open_bf"]).to eq(0)
+      expect(result["events"]).to         eq(2)
     end
   end
 
@@ -27,7 +27,7 @@ describe "all_rebuild" do
 
     it "generates accurate counts" do
       result = JSON.parse(`bmx host counts`)
-      expect(result["num_repos"]).to eq(1)
+      expect(result["repos"]).to  eq(1)
       expect(result["events"]).to eq(4)
     end
   end
@@ -41,26 +41,26 @@ describe "all_rebuild" do
 
     it "generates accurate counts" do
       result = JSON.parse(`bmx host counts`)
-      expect(result["num_users"]).to eq(4)
-      expect(result["events"]).to    eq(11)
+      expect(result["users"]).to   eq(4)
+      expect(result["events"]).to  eq(11)
     end
   end
 
   describe "simulation" do
     it "runs simulation" do
-      result = `./pytest1/simru`
+      result = `./pytest1/simulation.rb`
       expect($?.exitstatus).to eq(0)
       expect(result).to_not be_nil
     end
 
     it "generates accurate counts" do
       result = JSON.parse(`bmx host counts`)
-      expect(result["num_users"]).to  eq(4)
-      expect(result["num_repos"]).to  eq(1)
-      expect(result["num_issues"]).to eq(4)
-      expect(result["offers"]).to     eq(0)
-      expect(result["contracts"]).to  eq(0)
-      expect(result["events"]).to     eq(76)
+      expect(result["users"]).to           eq(4)
+      expect(result["repos"]).to           eq(1)
+      expect(result["issues"]).to          eq(4)
+      expect(result["offers_open"]).to     eq(0)
+      expect(result["contracts_open"]).to  eq(0)
+      expect(result["events"]).to          eq(76)
     end
 
     it "has accurate user balances" do

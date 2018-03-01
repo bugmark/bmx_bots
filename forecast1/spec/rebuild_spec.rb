@@ -10,16 +10,16 @@ describe "all_rebuild" do
 
     it "generates accurate counts" do
       result = JSON.parse(`bmx host counts`)
-      expect(result["num_users"]).to eq(1)
-      expect(result["num_repos"]).to eq(0)
-      expect(result["bu_offers"]).to eq(0)
-      expect(result["bf_offers"]).to eq(0)
-      expect(result["events"]).to    eq(2)
+      expect(result["users"]).to          eq(1)
+      expect(result["repos"]).to          eq(0)
+      expect(result["offers_open_bf"]).to eq(0)
+      expect(result["offers_open_bf"]).to eq(0)
+      expect(result["events"]).to         eq(2)
     end
   end
 
   describe "user_load" do
-    it "loads users" do
+    it "loads users" do #
       result = `./forecast1/user_load.sh`
       expect($?.exitstatus).to eq(0)
       expect(result).to_not be_nil
@@ -27,8 +27,8 @@ describe "all_rebuild" do
 
     it "generates accurate counts" do
       result = JSON.parse(`bmx host counts`)
-      expect(result["num_users"]).to eq(4)
-      expect(result["events"]).to    eq(9)
+      expect(result["users"]).to   eq(4)
+      expect(result["events"]).to  eq(9)
     end
   end
 
@@ -41,8 +41,8 @@ describe "all_rebuild" do
 
     it "generates accurate counts" do
       result = JSON.parse(`bmx host counts`)
-      expect(result["num_repos"]).to eq(3)
-      expect(result["num_issues"]).to eq(6)
+      expect(result["repos"]).to  eq(3)
+      expect(result["issues"]).to eq(6)
       expect(result["events"]).to eq(19)
     end
   end
@@ -56,9 +56,9 @@ describe "all_rebuild" do
 
     it "generates accurate counts" do
       result = JSON.parse(`bmx host counts`)
-      expect(result["bu_offers"]).to eq(7)
-      expect(result["bf_offers"]).to eq(5)
-      expect(result["events"]).to eq(32)
+      expect(result["offers_open_bu"]).to eq(7)
+      expect(result["offers_open_bf"]).to eq(5)
+      expect(result["events"]).to         eq(32)
     end
   end
 end
