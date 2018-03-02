@@ -21,8 +21,8 @@
 # STEP 5) DEFINE A RESULTS FUNCTION
 # - shows the cached results for each trial
 # 
-# STEP 6) CALL THE SIMULATION RUNNER
-# `run_simulation_and_show_results $@`
+# STEP 6) CALL THE BOT RUNNER
+# `run_bot_and_show_results $@`
 # 
 # COMMAND-LINE RUNNER USAGE:
 # $ run help                  -> list each simulation trial with one-line docco
@@ -77,7 +77,7 @@ run_bot() {
     do
       export TRIAL_NAME="$trial_name"
       echo "----- Running Bot for $TRIAL_NAME -----"
-      $trial_name   # setup simulation parameters
+      $trial_name   # setup trial parameters
       bot           # run bot
     done
   fi
@@ -87,14 +87,14 @@ show_results() {
   reset_params
   if [ "$#" == "0" ]; then
     export TRIAL_NAME=default
-    echo "----- Default Simulation Results -----"
+    echo "----- Default Trial Results -----"
     results
   else
     for trial_name in "$@"
     do
       export TRIAL_NAME="$trial_name"
-      echo "----- Simulation Results for $TRIAL_NAME -----"
-      $trial_name   # setup simulation parameters
+      echo "----- Trial Results for $TRIAL_NAME -----"
+      $trial_name   # setup trial parameters
       results       # show results
     done
   fi
