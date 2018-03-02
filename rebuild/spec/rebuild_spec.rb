@@ -1,9 +1,11 @@
 require 'json'
 
+basedir=File.expand_path("../", __dir__)
+
 describe "rebuild" do
   describe "clear" do
     it "clears the system" do
-      result = `./rebuild/clear`
+      result = `#{basedir}/clear`
       expect($?.exitstatus).to eq(0)
       expect(result).to_not be_nil
     end
@@ -20,7 +22,7 @@ describe "rebuild" do
 
   describe "user_load" do
     it "loads users" do
-      result = `./rebuild/user_load`
+      result = `#{basedir}/user_load`
       expect($?.exitstatus).to eq(0)
       expect(result).to_not be_nil
     end
@@ -34,7 +36,7 @@ describe "rebuild" do
 
   describe "repo_load" do
     it "loads repos" do
-      result = `./rebuild/repo_load Test`
+      result = `#{basedir}/repo_load Test`
       expect($?.exitstatus).to eq(0)
       expect(result).to_not be_nil
     end
@@ -49,7 +51,7 @@ describe "rebuild" do
 
   describe "offer_load" do
     it "loads bu" do
-      result = `./rebuild/offer_load`
+      result = `#{basedir}/offer_load`
       expect($?.exitstatus).to eq(0)
       expect(result).to_not be_nil
     end

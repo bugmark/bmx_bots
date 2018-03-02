@@ -1,9 +1,11 @@
 require 'json'
 
+basedir=File.expand_path("../", __dir__)
+
 describe "all_rebuild" do
   describe "rebuild" do
     it "rebuilds the system" do
-      result = `./pytest1/rebuild`
+      result = `#{basedir}/rebuild`
       expect($?.exitstatus).to eq(0)
       expect(result).to_not be_nil
     end
@@ -20,7 +22,7 @@ describe "all_rebuild" do
 
   describe "repo_load" do
     it "loads repos" do
-      result = `./pytest1/repo_load`
+      result = `#{basedir}/repo_load`
       expect($?.exitstatus).to eq(0)
       expect(result).to_not be_nil
     end
@@ -34,41 +36,40 @@ describe "all_rebuild" do
 
   describe "user_load" do
     it "loads users" do
-      result = `./pytest1/user_load`
+      result = `#{basedir}/user_load`
       expect($?.exitstatus).to eq(0)
       expect(result).to_not be_nil
     end
 
     it "generates accurate counts" do
       result = JSON.parse(`bmx host counts`)
-      expect(result["users"]).to   eq(4)
-      expect(result["events"]).to  eq(11)
+      expect(result["users"]).to   eq(3)
+      expect(result["events"]).to  eq(9)
     end
   end
 
   describe "simulation" do
     it "runs simulation" do
-      result = `./pytest1/simulation.rb`
+      result = `#{basedir}/simulation.rb`
       expect($?.exitstatus).to eq(0)
       expect(result).to_not be_nil
     end
 
     it "generates accurate counts" do
       result = JSON.parse(`bmx host counts`)
-      expect(result["users"]).to           eq(4)
+      expect(result["users"]).to           eq(3)
       expect(result["repos"]).to           eq(1)
-      expect(result["issues"]).to          eq(4)
+      expect(result["issues"]).to          eq(2)
       expect(result["offers_open"]).to     eq(0)
       expect(result["contracts_open"]).to  eq(0)
-      expect(result["events"]).to          eq(76)
+      expect(result["events"]).to          eq(42)
     end
 
     it "has accurate user balances" do
       funder  = JSON.parse(`bmx user list --with_email=funder`).first
       workers = JSON.parse(`bmx user list --with_email=worker`)
-      expect(funder["balance"]).to     eq(100400)
+      expect(funder["balance"]).to     eq(100200)
       expect(workers[0]["balance"]).to eq(9800)
-      expect(workers[1]["balance"]).to eq(9800)
     end
   end
 end

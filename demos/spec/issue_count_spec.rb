@@ -1,5 +1,7 @@
 require 'json'
 
+basedir=File.expand_path("../", __dir__)
+
 describe "issue_count" do
   it "runs the CLI" do
     result = `bmx`
@@ -8,7 +10,7 @@ describe "issue_count" do
   end
 
   it "runs the script" do
-    result = `./demos/issue_count`
+    result = `#{basedir}/issue_count`
     expect($?.exitstatus).to eq(0)
     expect(result).to_not be_nil
   end

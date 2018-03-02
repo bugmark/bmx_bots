@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+
+BASEDIR=$(dirname "$0")
+source $BASEDIR/../util/bugm_helpers.sh
+
+params() {
+  (
+    SIMULATION_DAYS # number of simulation days
+    REPO_NAME       # name of test repo
+    NUM_WORKERS     # number of simulation workers
+    WORKER_BALANCE  # opening worker balance
+    FUNDER_BALANCE  # opending funder balance
+    FIXED_PRICE     # price of an offer to buy fixed
+    UNFIXED_PRICE   # price of an offer to buy unfixed
+  )
+}
+
+function long_trial() # Full Simulation
+{
+  export SIMULATION_DAYS=10
+  export REPO_NAME="TestRepo" 
+  export NUM_WORKERS=5
+  export WORKER_BALANCE=20000
+  export FUNDER_BALANCE=1000000
+}
+
+function trial1() # Fixed @ 0.0, Unfixed @ 1.0 
+{
+  export FIXED_PRICE=0
+  export UNFIXED_PRICE=1
+}
+
+function trial2() # Fixed @ 1.0, Unfixed @ 0.0
+{ 
+  export FIXED_PRICE=1
+  export UNFIXED_PRICE=0
+}
+
+bot() {
+  echo "START `date`"
+  ( echo Rebuild Data   ; $BASEDIR/rebuild       ) &&
+  ( echo Load Repos     ; $BASEDIR/repo_load     ) &&
+  ( echo Load Users     ; $BASEDIR/user_load     ) &&
+  ( echo Run Simulation ; $BASEDIR/simulation.py ) &&
+  ( echo Counts         ; $BASEDIR/count         ) &&
+  echo "DONE `date`"
+}
+
+results() {
+  bmx cache show --file=$TRIAL_NAME --color
+}
+
+run_simulation_and_show_results $@

@@ -4,7 +4,8 @@
 
 import bugm_util as bugm
 
-num_workers    = bugm.env('NUM_WORKERS'   , 2)
+# simulation parameters
+num_workers    = bugm.env('NUM_WORKERS'   , 1)
 worker_balance = bugm.env('WORKER_BALANCE', 10000)
 funder_balance = bugm.env('FUNDER_BALANCE', 100000)
 
@@ -16,10 +17,10 @@ def create_user(email, balance="0"):
                  "--balance="+balance])
 
 # create funder
-create_user("funder@bugmark.net", str(funder_balance))
+create_user("test-funder@bugmark.net", str(funder_balance))
 
 # create workers
 for w in range(int(num_workers)):
-  email = "worker"+str(w)+"@bugmark.net"
+  email = "test-worker"+str(w)+"@bugmark.net"
   create_user(email, str(worker_balance))
 
