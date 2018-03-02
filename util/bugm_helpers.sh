@@ -113,7 +113,7 @@ show_results() {
 
 # -------------------------------------------------------------------------
 
-run_simulation_and_show_results() {
+run_bot_and_show_results() {
   show_help          $1
   validate_arguments $@
   bmx cache clear

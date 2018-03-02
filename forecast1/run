@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+BASEDIR=$(dirname "$0")
+source $BASEDIR/../util/bugm_helpers.sh
+
+params() {
+  (
+    SIMULATION_DAYS # number of simulation days
+  )
+}
+
+bot() {
+  echo "START `date`"
+  ( echo Clear Old Data ; $BASEDIR/rebuild       ) &&
+  ( echo Load User Data ; $BASEDIR/user_load     ) &&
+  ( echo Load Repos     ; $BASEDIR/repo_load     ) &&
+  ( echo Load Offers    ; $BASEDIR/offer_load    ) &&
+  ( echo Load Contracts ; $BASEDIR/contract_load ) &&
+  ( echo Counts         ; $BASEDIR/count         ) &&
+  echo "DONE `date`"
+}
+
+results() {
+  bmx cache show --file=$TRIAL_NAME --color
+}
+
+run_bot_and_show_results $@

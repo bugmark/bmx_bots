@@ -50,4 +50,4 @@ results() {
   bmx cache show --file=$TRIAL_NAME --color
 }
 
-run_simulation_and_show_results $@
+run_bot_and_show_results $@
