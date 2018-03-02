@@ -28,7 +28,7 @@
 # $ run help                  -> list each simulation trial with one-line docco
 # $ run                       -> run the simulation with default parameters
 # $ run <trial1>              -> run trial1
-# $ run <trial1> ... <trialN> -> run all trials...
+# $ run <trial1> ... <trialN> -> run multiple trials...
 #
 # -------------------------------------------------------------------------
 
