@@ -42,26 +42,13 @@ reset_params() {
 
 # -------------------------------------------------------------------------
 
-abort() {
-  echo "Usage: run <trial1 | trial2 | long_trial>"
-  exit 1
-}
-
-error() {
-  echo "ERROR: unrecognized option ($1)"
-}
-
-# -------------------------------------------------------------------------
-
 show_help() {
   [ "$1" == "help" ] || return
   echo "USAGE: run [<option1> .. <optionN>]"
   echo "trial options:"
   grep "^function" $0 | sed -e "s/function /  - /g" | sed -e "s/()//g" | column -t -s '#'
-  exit
+  exit 1
 }
-
-# -------------------------------------------------------------------------
 
 has_func() {
   grep "^function" $0 | cut -f 2 -d ' ' | sed -e "s/()//g" | grep "^$1$"
@@ -76,6 +63,8 @@ validate_arguments() {
     fi
   done
 }
+
+# -------------------------------------------------------------------------
 
 run_bot() {
   reset_params
