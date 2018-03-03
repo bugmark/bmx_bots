@@ -102,7 +102,7 @@ class PTrivialCase1Worker(Person):
         # issue_rtn = check_output(["bmx", "issue", "show", str(issue)])
         # issue_obj = json.loads(issue_rtn.decode("utf-8"))
 
-        # Do the work:
+        # Do not do the work:
         # check_output(["bmx", "issue", "sync",
         #               str(issue),
         #               "--status=closed"
