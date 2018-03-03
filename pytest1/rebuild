@@ -1,0 +1,11 @@
+#!/usr/bin/env python
+
+import bugm_util as bugm
+
+# ----- simulation params -----
+start_offset = bugm.env('SIMULATION_DAYS', 2)
+
+# ----- host rebuild -----
+bugm.run_json("config set --usermail=admin@bugmark.net --password=bugmark --color=false")
+bugm.run_json(["host rebuild --affirm=destroy_all_data",
+               "--with_day_offset=-" + str(start_offset)])

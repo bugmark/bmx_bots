@@ -3,10 +3,6 @@
 echo "Download gem installer"
 gem install specific_install
 
-echo "Remove old gems"
-gem uninstall bmx_api_ruby
-gem uninstall bmx_cl_ruby 
-
 echo "Install/Upgrade Bugmark CLI"
 gem specific_install http://github.com/bugmark/bmx_api_ruby
 gem specific_install http://github.com/bugmark/bmx_cl_ruby

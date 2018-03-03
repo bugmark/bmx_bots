@@ -1,2 +1,5 @@
 /.idea/
 /bin/
+/**/*pyc
+**/*pyc
+**/*pycache*/
