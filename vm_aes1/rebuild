@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+# ----- simulation params -----
+
+start_offset = ENV['SIMULATION_WEEKS'] || 2
+
+# ----- host rebuild -----
+
+`bmx config set --usermail=admin@bugmark.net --password=bugmark --color=false`
+`bmx host rebuild --affirm=destroy_all_data --with_day_offset=-#{start_offset * 7}`

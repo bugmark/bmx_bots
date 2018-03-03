@@ -3,3 +3,4 @@
 bmx user create --balance=1000 --usermail=user1@bugmark.net
 bmx user create --balance=1000 --usermail=user2@bugmark.net
 bmx user create --balance=1000 --usermail=user3@bugmark.net
+
