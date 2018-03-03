@@ -103,11 +103,11 @@ class PTrivialCase1Worker(Person):
         # issue_obj = json.loads(issue_rtn.decode("utf-8"))
 
         # Do not do the work:
-        # check_output(["bmx", "issue", "sync",
-        #               str(issue),
-        #               "--status=closed"
-        #               # "--repo_uuid="+issue_obj["stm_repo_uuid"]
-        #               ])
+        check_output(["bmx", "issue", "sync",
+                      str(issue),
+                      "--status=open"
+                      # "--repo_uuid="+issue_obj["stm_repo_uuid"]
+                      ])
 
         return offer
 
