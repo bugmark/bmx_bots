@@ -50,7 +50,7 @@ describe "all_rebuild" do
 
   describe "simulation" do
     it "runs simulation" do
-      result = `#{basedir}/simulation.rb`
+      result = `#{basedir}/simulation.py`
       expect($?.exitstatus).to eq(0)
       expect(result).to_not be_nil
     end
@@ -68,8 +68,8 @@ describe "all_rebuild" do
     it "has accurate user balances" do
       funder  = JSON.parse(`bmx user list --with_email=funder`).first
       workers = JSON.parse(`bmx user list --with_email=worker`)
-      expect(funder["balance"]).to     eq(100200)
-      expect(workers[0]["balance"]).to eq(9800)
+      expect(funder["balance"]).to     eq(99800.0)
+      expect(workers[0]["balance"]).to eq(10200.0)
     end
   end
 end
