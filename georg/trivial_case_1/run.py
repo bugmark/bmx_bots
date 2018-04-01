@@ -20,6 +20,7 @@ import person
 import datetime
 
 # Step 1: define the simulation parameters
+print("start simulation, define parameter [DONE]")
 number_of_workers = 10  # how many people we start with
 # number_of_issues = 10  # how many issues we start with
 # rate_of_new_issues = 3  # create x new issues every day
@@ -30,18 +31,21 @@ funder_starting_funds = 999999999  # how much money a funder starts with
 simulation_time = 100  # how many days to simulate
 # ...
 # rebuild server in the past
+print("reset bugmark", end="")
+sys.stdout.flush()
 check_output(["bmx", "host", "rebuild",
               "--affirm=destroy_all_data",
               "--with_day_offset=-"+str(simulation_time)])
+print(" [DONE]")
 
 # Step 2: load issue tracker
+print("create repo", end="")
+sys.stdout.flush()
 # tracker = issuetracker.IssueTracker()
 # for i = 1 to number of issues
 # tracker.open_issue()  # (x10)
 issues = 0
 # create simulation repository
-print("reset bugmark", end="")
-sys.stdout.flush()
 repo_name = "TrivialCase1Repo"
 repo_rtn = check_output(["bmx", "repo", "create",
                          repo_name,
