@@ -12,7 +12,7 @@ echo "----- BUGMARK-CLI TOTAL REBUILD TEST ---------------------"
 echo "START `date`"
 ( echo Clear Old Data ; ./rebuild/clear         ) && 
 ( echo Load User Data ; ./rebuild/user_load     ) &&
-( echo Load Test Repo ; ./rebuild/repo_load $1  ) &&
+( echo Load Test Tracker ; ./rebuild/tracker_load $1  ) &&
 ( echo Load Offers    ; ./rebuild/offer_load    ) &&
 ( echo Load Contracts ; ./rebuild/contract_load ) &&
 ( echo Counts         ; ./rebuild/count         ) &&

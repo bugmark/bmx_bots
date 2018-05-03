@@ -39,15 +39,15 @@ check_output(["bmx", "host", "rebuild",
 # for i = 1 to number of issues
 # tracker.open_issue()  # (x10)
 issues = 0
-# create simulation repository
+# create simulation trackersitory
 print("reset bugmark", end="")
 sys.stdout.flush()
-repo_name = "TrivialCase1Repo"
-repo_rtn = check_output(["bmx", "repo", "create",
-                         repo_name,
+tracker_name = "TrivialCase1Tracker"
+tracker_rtn = check_output(["bmx", "tracker", "create",
+                         tracker_name,
                          "--type=Test"])
-repo_obj = json.loads(repo_rtn.decode("utf-8"))
-repo_uuid = repo_obj["uuid"]
+tracker_obj = json.loads(tracker_rtn.decode("utf-8"))
+tracker_uuid = tracker_obj["uuid"]
 print(" [DONE]")
 
 # Step 3: instantiate people (agents)
@@ -95,7 +95,7 @@ for x in range(simulation_time):
         issue_rtn = check_output(["bmx", "issue", "sync",
                                   str(issues),
                                   # "--type=Test",
-                                  "--repo-uuid="+repo_uuid])
+                                  "--tracker-uuid="+tracker_uuid])
         issue_obj = json.loads(issue_rtn.decode("utf-8"))
         issue_uuid = issue_obj["uuid"]
 

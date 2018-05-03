@@ -10,7 +10,7 @@ fixed_price   = bugm.env('FIXED_PRICE'  , 0)
 
 # ----- local variables -----
 simulation_days = bugm.run_dict("host info")["day_offset"] * -1
-repo_uuid       = bugm.run_dict("repo list")[0]["uuid"]
+tracker_uuid       = bugm.run_dict("tracker list")[0]["uuid"]
 funder          = bugm.run_dict("user list --with_email=test-funder")[0]
 workers         = bugm.run_dict("user list --with_email=test-worker")
 num_workers     = len(workers)
@@ -18,7 +18,7 @@ num_workers     = len(workers)
 # ----- utility functions -----
 def create_issue(day, idx):
   issue_id = "issue_" + str(day) + "_" + str(idx)
-  opts = ["issue sync", issue_id, "--repo-uuid="+repo_uuid, "--status=closed"]
+  opts = ["issue sync", issue_id, "--tracker-uuid="+tracker_uuid, "--status=closed"]
   issue_uuid = bugm.run_dict(opts)["uuid"]
   return issue_uuid
 

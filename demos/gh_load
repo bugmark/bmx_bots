@@ -1,0 +1,59 @@
+#!/usr/bin/env ruby
+
+require 'json'
+
+# %w(mvscorg/bugmark mvscorg/bugmark-guides mvscorg/bugmark-slides elixir-lang/gen_stage elixir-lang/flow elixir-lang/gettext rust-lang/regex filterbubbler/filterbubbler-web-ext filterbubbler/filterbubbler-wp-plugin).each do |name|
+TRACKER_LIST = %w(bmx_cl_ruby bmx_api_ruby exchange bugmark_docs test_bench)
+
+PROCNAME = "gh_load"
+Process.setproctitle(PROCNAME)
+
+def hdr(string)
+  puts "----- #{string.upcase} ".ljust(60, '-')
+end
+
+def sync(name)
+
+EXIDS = %w(aaa bbb ccc ddd eee fff ggg hhh iii jjj kkk)
+
+TRACKER = JSON.parse(`bmx tracker create SIMULA --type=Test`)
+pp TRACKER
+
+def defaults
+  {
+    "type"      => "Test"          ,
+    "tracker_uuid" => TRACKER["uuid"]    ,
+  }
+
+end
+  opts = {
+    name: name               ,
+    type: "Tracker::GitHub"
+  }
+
+  tracker_cmd = TrackerCmd::GhCreate.new(opts)
+  tracker_cmd.project
+  item = TrackerCmd::GhSync.from_tracker(tracker_cmd.tracker)
+  item.project
+end
+
+
+def sync(exid, lcl_opts = {})
+  opts = defaults.merge(lcl_opts)
+  args = opts.keys.map {|key| "--#{key}=#{opts[key]}"}.join(" ")
+  `bmx issue sync #{exid} #{args}`
+end
+
+
+hdr  "BUGMARK GH LOAD"
+puts "START #{Time.now} | C-c to exit"
+puts "Process Name: #{PROCNAME}"
+
+hdr "CREATE TRACKERS"
+TRACKER_LIST.each do |name|
+  fullname = "bugmark/#{name}"
+  puts "Loading #{fullname}"
+  sync(fullname)
+end
+
+

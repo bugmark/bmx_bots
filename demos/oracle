@@ -13,16 +13,16 @@ hdr  "BUGMARK ISSUE ORACLE"
 puts "START #{Time.now} | C-c to exit"
 puts "Process Name: #{PROCNAME}"
 
-hdr "CREATE SIMULATED REPO"
-REPO = JSON.parse(`bmx repo create SIMULA --type=Test`)
-pp REPO
+hdr "CREATE SIMULATED TRACKER"
+TRACKER = JSON.parse(`bmx tracker create SIMULA --type=Test`)
+pp TRACKER
 
 EXIDS = %w(aaa bbb ccc ddd eee fff ggg hhh iii jjj kkk)
 
 def defaults
   {
     "type"      => "Test"          ,
-    "repo_uuid" => REPO["uuid"]    ,
+    "tracker_uuid" => TRACKER["uuid"]    ,
   }
 end
 
@@ -39,7 +39,7 @@ EXIDS.each do |exid|
 end
 puts "."
 
-puts `bmx repo show #{REPO["uuid"]} --issues`
+puts `bmx tracker show #{TRACKER["uuid"]} --issues`
 
 hdr "SECOND PASS"
 EXIDS.each do |exid|
@@ -48,4 +48,4 @@ EXIDS.each do |exid|
 end
 puts "."
 
-puts `bmx repo show #{REPO["uuid"]} --issues`
+puts `bmx tracker show #{TRACKER["uuid"]} --issues`

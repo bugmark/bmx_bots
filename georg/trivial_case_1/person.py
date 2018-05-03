@@ -98,13 +98,13 @@ class PTrivialCase1Worker(Person):
                                   ":"+self.bugmark_password])
         offer = json.loads(offer_rtn.decode("utf-8"))
         # do the work and close the issue
-        # get repo uuid to be able to update issue
+        # get tracker uuid to be able to update issue
         issue_rtn = check_output(["bmx", "issue", "show", str(issue)])
         issue_obj = json.loads(issue_rtn.decode("utf-8"))
         check_output(["bmx", "issue", "sync",
                       str(issue),
                       "--status=closed",
-                      "--repo_uuid="+issue_obj["stm_repo_uuid"]])
+                      "--tracker_uuid="+issue_obj["stm_tracker_uuid"]])
         # check_output(["bmx", "contract", "list"])
         #    return 1
         return offer

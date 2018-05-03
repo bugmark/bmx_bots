@@ -13,7 +13,7 @@ base_dir=File.expand_path("../", __dir__)
 #     it "generates accurate counts" do
 #       result = JSON.parse(`bmx host counts`)
 #       expect(result["users"]).to          eq(1)
-#       expect(result["repos"]).to          eq(0)
+#       expect(result["trackers"]).to          eq(0)
 #       expect(result["offers_open_bf"]).to eq(0)
 #       expect(result["offers_open_bf"]).to eq(0)
 #       expect(result["events"]).to         eq(2)
@@ -34,16 +34,16 @@ base_dir=File.expand_path("../", __dir__)
 #     end
 #   end
 #
-#   describe "repo_load" do
-#     it "loads repos" do
-#       result = `#{base_dir}/repo_load`
+#   describe "tracker_load" do
+#     it "loads trackers" do
+#       result = `#{base_dir}/tracker_load`
 #       expect($?.exitstatus).to eq(0)
 #       expect(result).to_not be_nil
 #     end
 #
 #     it "generates accurate counts" do
 #       result = JSON.parse(`bmx host counts`)
-#       expect(result["repos"]).to  eq(3)
+#       expect(result["trackers"]).to  eq(3)
 #       expect(result["issues"]).to eq(6)
 #       expect(result["events"]).to eq(19)
 #     end

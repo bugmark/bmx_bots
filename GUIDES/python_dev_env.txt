@@ -1,7 +1,7 @@
-A) === Set up GitHub and clone repository locally ===
+A) === Set up GitHub and clone trackersitory locally ===
 - create your account
 - install Git on your computer
-- clone the bugmark/bmx_bots repository to your local drive
+- clone the bugmark/bmx_bots trackersitory to your local drive
 $ git clone git@github.com:bugmark/bmx_bots.git
 
 Helpful Resources:
@@ -29,16 +29,16 @@ Helpful Resources:
 
 D) === Workflow ===
 
-D.0 == structure of GitHub repository ==
-The git repository has a master branch, which is only for archiving (semi) stable code. Actual development should occur on your own branch.
+D.0 == structure of GitHub trackersitory ==
+The git trackersitory has a master branch, which is only for archiving (semi) stable code. Actual development should occur on your own branch.
 
 1) Create your branch:
 local$> git checkout -b bot_malvika
 
-2) Within the repository, create your own folder where all of your work can live
+2) Within the trackersitory, create your own folder where all of your work can live
 local$> mkdir malvika
 
-3) After making changes and saving your work, you need to commit the changes to the repository
+3) After making changes and saving your work, you need to commit the changes to the trackersitory
 local$> git add *
 local$> git commit -m "short message describing changes"
 

@@ -1,0 +1,12 @@
+#!/usr/bin/env python
+
+import bugm_util as bugm
+
+# create simulation tracker
+
+tracker_name    = bugm.env('TRACKER_NAME' , "TrivialCasetracker")
+
+bugm.run_json(["tracker create",
+               tracker_name,
+               "--type=Test"])
+

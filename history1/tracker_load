@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+require 'json'
+
+tracker_names = %w(Tracker1 Tracker2 Tracker3)
+
+# create trackers
+tracker_hash  = tracker_names.reduce({}) do |hash, name|
+  hash[name] = JSON.parse(`bmx tracker create #{name} --type=Test`)["uuid"]
+  hash
+end
+
+pp tracker_hash
+
+# create issues
+tracker_hash.each do |tracker_name, tracker_uuid|
+  [1,2].map do |id|
+    exid = "#{tracker_name}_Issue#{id}"
+    cmd = "bmx issue sync #{exid} --title=#{exid} --status=open --tracker_uuid=#{tracker_uuid}"
+    system cmd
+  end
+end

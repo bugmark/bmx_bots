@@ -25,11 +25,11 @@ params() {
 
 bot() {
   echo "START `date`"
-  ( echo Rebuild System  ; $BASEDIR/rebuild   ) &&
-  ( echo Load User Data  ; $BASEDIR/user_load ) &&
-  ( echo Load Repos      ; $BASEDIR/repo_load ) &&
-  ( echo Trade System    ; $BASEDIR/trade     ) &&
-  ( echo Capture Results ; $BASEDIR/capture   ) &&
+  ( echo Rebuild System  ; $BASEDIR/rebuild      ) &&
+  ( echo Load User Data  ; $BASEDIR/user_load    ) &&
+  ( echo Load Trackers   ; $BASEDIR/tracker_load ) &&
+  ( echo Trade System    ; $BASEDIR/trade        ) &&
+  ( echo Capture Results ; $BASEDIR/capture      ) &&
   echo "DONE `date`"
 }
 

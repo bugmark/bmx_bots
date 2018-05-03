@@ -6,7 +6,7 @@ source $BASEDIR/../util/bugm_helpers.sh
 params() {
   (
     SIMULATION_DAYS # number of simulation days
-    REPO_NAME       # name of test repo
+    TRACKER_NAME       # name of test tracker
     NUM_WORKERS     # number of simulation workers
     WORKER_BALANCE  # opening worker balance
     FUNDER_BALANCE  # opending funder balance
@@ -18,7 +18,7 @@ params() {
 function long_trial() # Full Simulation
 {
   export SIMULATION_DAYS=10
-  export REPO_NAME="TestRepo" 
+  export TRACKER_NAME="TestTracker"
   export NUM_WORKERS=5
   export WORKER_BALANCE=20000
   export FUNDER_BALANCE=1000000
@@ -39,7 +39,7 @@ function trial2() # Fixed @ 1.0, Unfixed @ 0.0
 bot() {
   echo "START `date`"
   ( echo Rebuild Data   ; $BASEDIR/rebuild       ) &&
-  ( echo Load Repos     ; $BASEDIR/repo_load     ) &&
+  ( echo Load Trackers     ; $BASEDIR/tracker_load     ) &&
   ( echo Load Users     ; $BASEDIR/user_load     ) &&
   ( echo Run Simulation ; $BASEDIR/simulation.py ) &&
   ( echo Counts         ; $BASEDIR/count         ) &&

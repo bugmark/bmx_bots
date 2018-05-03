@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+
+require 'json'
+
+def stop_script
+  abort "Usage: tracker_load <GitHub|Test>"
+end
+
+def gen_github_tracker
+  `bmx tracker create bugmark/bugmark      --sync=true --type=GitHub`
+  `bmx tracker create bugmark/bmx_api_ruby --sync=true --type=GitHub`
+  `bmx tracker create bugmark/bmx_cl_ruby  --sync=true --type=GitHub`
+  `bmx tracker create bugmark/bmx_bots     --sync=true --type=GitHub`
+end
+
+def gen_test_tracker
+  tracker_uuid = JSON.parse(`bmx tracker create TestTracker --type=Test`)["uuid"]
+  %w(aa bb cc dd ee ff gg hh ii jj kk ll mm).each do |exid|
+    `bmx issue sync #{exid} --title=Title_#{exid} --status=open --tracker_uuid=#{tracker_uuid}`
+  end
+end
+
+stop if ARGV.count == 0
+
+tracker_TYPE = ARGV[0]
+
+stop_script unless %w(GitHub Test).include?(tracker_TYPE)
+
+case tracker_TYPE
+when 'GitHub' then gen_github_tracker
+when 'Test'   then gen_test_tracker
+end
+

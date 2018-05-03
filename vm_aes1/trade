@@ -10,7 +10,7 @@ exit
 
 # ----- local variables -----
 SIMULATION_DAYS = JSON.parse(`bmx host info`)["day_offset"] * -1
-REPO_UUID       = JSON.parse(`bmx repo list`)[0]["uuid"]
+TRACKER_UUID       = JSON.parse(`bmx tracker list`)[0]["uuid"]
 FUNDER          = JSON.parse(`bmx user list --with_email=funder`)[0]
 WORKERS         = JSON.parse(`bmx user list --with_email=worker`)
 NUM_WORKERS     = WORKERS.length
@@ -18,7 +18,7 @@ NUM_WORKERS     = WORKERS.length
 # ----- utility functions -----
 def create_issue(day, idx)
   issue_id = "issue_#{day}_#{idx}"
-  JSON.parse(`bmx issue sync #{issue_id} --repo-uuid=#{REPO_UUID}`)["uuid"]
+  JSON.parse(`bmx issue sync #{issue_id} --tracker-uuid=#{TRACKER_UUID}`)["uuid"]
 end
 
 def create_buy_offer(issue, side, email)
