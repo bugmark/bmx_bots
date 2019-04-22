@@ -12,7 +12,7 @@ which matures on Sunday March 4 at midnight.
 
 For years, AES has been a stable and secure algorithm, at the foundation of the
 computer security pyramid. AES is trusted as a standard by the US Government
-and numerous organizations.  The collective wisdom say that no critical
+and numerous organizations.  The collective wisdom says that no critical
 vulnerabilities will be discovered in AES.  But if the collective wisdom is
 wrong, there will be billions upon billions in economic consequences.  In this
 unlikely event, it will be important that the vulnerability be uncovered and
@@ -27,7 +27,7 @@ The VmAes market simulation involves the following actors:
   public/private partnership with a mission to monitor and mitigate AES
   vulnerabilities.  
 
-* The _Information Source_ is a renowned hacker (referred to as the _Hacker_) a
+* The _Information Source_ is a renowned hacker (referred to as the _Hacker_) and a
   quasi-criminal mastermind.  
 
 * The _Council of Experts_ (collectively known as the _Council_) is a group of
